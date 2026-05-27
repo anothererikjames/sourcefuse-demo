@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/customers/:externalId"
+  method: GET
+  pathVariables:
+    externalId: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "externalId": "ext_demo",
+        "firstName": "Alex",
+        "lastName": "Diaz",
+        "address": {
+          "city": "San Francisco",
+          "state": "CA"
+        },
+        "legacyAccountNumber": "0001234567"
+      }
+order: 1000

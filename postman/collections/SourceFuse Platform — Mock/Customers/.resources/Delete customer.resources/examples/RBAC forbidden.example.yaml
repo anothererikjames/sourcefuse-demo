@@ -1,0 +1,22 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/customers/:customerId"
+  method: DELETE
+  pathVariables:
+    customerId: ""
+response:
+  statusCode: 403
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": {
+          "code": "rbac.forbidden",
+          "requiredRole": "admin",
+          "actorRole": "analyst"
+        }
+      }
+order: 1000

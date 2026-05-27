@@ -1,0 +1,22 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/accounts/:accountId"
+  method: GET
+  pathVariables:
+    accountId: ""
+response:
+  statusCode: 429
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    Retry-After: "12"
+  body:
+    type: json
+    content: |-
+      {
+        "error": {
+          "code": "rate_limited",
+          "retryAfterSeconds": 12
+        }
+      }
+order: 6000

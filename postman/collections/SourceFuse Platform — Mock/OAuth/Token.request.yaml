@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/oauth2/token"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "grant_type": "client_credentials"
+    }
+examples: ./.resources/Token.resources/examples
+order: 1000

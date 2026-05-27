@@ -1,0 +1,18 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/notifications"
+  method: POST
+response:
+  statusCode: 503
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": {
+          "code": "channel_offline"
+        }
+      }
+order: 3000

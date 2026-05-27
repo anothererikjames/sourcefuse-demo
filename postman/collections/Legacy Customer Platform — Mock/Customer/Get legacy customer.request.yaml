@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/customers/:externalId"
+method: GET
+headers:
+  X-Legacy-API-Key: "{{authToken}}"
+pathVariables:
+  externalId: ""
+examples: ./.resources/Get legacy customer.resources/examples
+order: 1000

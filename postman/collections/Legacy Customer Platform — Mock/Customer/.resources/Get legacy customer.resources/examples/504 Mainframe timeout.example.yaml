@@ -1,0 +1,21 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/customers/:externalId"
+  method: GET
+  pathVariables:
+    externalId: ""
+response:
+  statusCode: 504
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": {
+          "code": "mainframe_timeout",
+          "region": "CICSPROD1"
+        }
+      }
+order: 3000

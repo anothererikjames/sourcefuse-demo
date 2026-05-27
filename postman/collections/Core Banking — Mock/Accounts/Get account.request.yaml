@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/accounts/:accountId"
+method: GET
+headers:
+  Authorization: Bearer {{authToken}}
+pathVariables:
+  accountId: ""
+examples: ./.resources/Get account.resources/examples
+order: 1000

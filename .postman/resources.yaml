@@ -1,7 +1,18 @@
-# Use this workspace to collaborate
 workspace:
   id: f6ab418b-b4d3-47a3-905c-71601d964f6d
-
 localResources:
   specs:
     - ../openapi.yaml
+  collections:
+    - ../postman/collections/SourceFuse Platform — Mock
+    - ../postman/collections/Notification Service — Mock
+    - ../postman/collections/Core Banking — Mock
+    - ../postman/collections/Legacy Customer Platform — Mock
+    - ../postman/collections/Payment Processor — Mock
+cloudResources:
+  collections:
+    ../postman/collections/SourceFuse Platform — Mock: 52238111-030e8873-178d-42bf-bfae-2430a1840bec
+    ../postman/collections/Notification Service — Mock: 52238111-1d59801d-5cdf-4033-afef-20f1557a34d0
+    ../postman/collections/Core Banking — Mock: 52238111-2a05e833-e689-4482-a98f-a59b353ce9af
+    ../postman/collections/Legacy Customer Platform — Mock: 52238111-2b59a1db-a80e-49ec-ae4c-04a361f71e07
+    ../postman/collections/Payment Processor — Mock: 52238111-f2b36595-8095-4b54-9d48-acad526a1633

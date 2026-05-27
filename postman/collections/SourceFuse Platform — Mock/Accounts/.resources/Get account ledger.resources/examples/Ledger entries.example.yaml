@@ -1,0 +1,34 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/accounts/:accountId/ledger"
+  method: GET
+  pathVariables:
+    accountId: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "accountId": "acc_4f3b1e22",
+        "openingBalance": "0.00",
+        "closingBalance": "250.00",
+        "entries": [
+          {
+            "direction": "credit",
+            "amount": "250.00",
+            "memo": "Initial funding",
+            "at": "2026-05-27T17:14:15Z"
+          },
+          {
+            "direction": "debit",
+            "amount": "250.00",
+            "memo": "External clearing",
+            "at": "2026-05-27T17:14:15Z"
+          }
+        ]
+      }
+order: 1000

@@ -1,0 +1,48 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/customers?limit=5"
+  method: GET
+  queryParams:
+    limit: "5"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    X-Correlation-Id: cor_demo
+    Cache-Control: max-age=30
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "id": "c2c8c0f6-7d6d-4ad9-9c1a-9b6a3a3f1b22",
+            "tenantId": "tnt_qa_001",
+            "email": "alex@sourcefuse.example.com",
+            "firstName": "Alex",
+            "lastName": "Diaz",
+            "status": "verified",
+            "address": {
+              "country": "US",
+              "postalCode": "94105"
+            },
+            "createdAt": "2026-05-20T17:14:08Z"
+          },
+          {
+            "id": "a8e1d9a0-3a44-4f70-9a8a-1c2b3d4e5f6a",
+            "tenantId": "tnt_qa_001",
+            "email": "jamie@sourcefuse.example.com",
+            "firstName": "Jamie",
+            "lastName": "Park",
+            "status": "pending_kyc",
+            "address": {
+              "country": "US",
+              "postalCode": "10001"
+            },
+            "createdAt": "2026-05-21T09:02:18Z"
+          }
+        ],
+        "nextCursor": null
+      }
+order: 1000

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# SourceFuse Demo — pre-commit guard
+#
+# Strips Postman Cloud Vault references from environment files before they
+# enter the commit. Postman desktop's cloud sync sometimes injects references
+# to your personal vault (e.g. supabase service-role keys) which trigger
+# GitHub push protection.
+#
+# Install once with:    git config core.hooksPath .githooks
+set -e
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+if ls postman/environments/*.environment.yaml >/dev/null 2>&1; then
+    python3 scripts/strip_vault_secrets.py
+    # Re-stage anything the strip script modified
+    git add postman/environments/*.environment.yaml 2>/dev/null || true
+fi

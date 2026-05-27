@@ -44,6 +44,34 @@ AI-assisted, source-controlled API quality operating model.
 7. **Outcomes** — reduced manual scripting, earlier failure detection, reusable governance,
    scalable across every API in the org
 
+## Secrets handling
+
+Postman desktop's cloud sync can inject references to personal-vault secrets
+(e.g. `supabase_service_role_api_key_*`) into environment files when it
+pulls. These references contain a `secretId` only — not the actual value —
+but GitHub push protection and Postman desktop both flag them on the
+variable name pattern.
+
+This repo guards against that:
+
+1. **Pre-commit hook** (`.githooks/pre-commit`) runs
+   `scripts/strip_vault_secrets.py` before every commit and strips:
+   - Any value with `secret: true` and a `source: postman` block
+   - Any value with a `vaultId` or `secretId` reference
+   - Any key matching well-known suspicious patterns (`supabase`,
+     `service_role`, `anon_key`, `github_pat`, `aws_secret`, etc.)
+2. **One-time hook install** (per clone):
+   ```
+   git config core.hooksPath .githooks
+   ```
+3. **Manual cleanup** if needed:
+   ```
+   python3 scripts/strip_vault_secrets.py
+   ```
+
+If the warning keeps reappearing, remove the offending secret from your
+**Postman personal vault** so it stops auto-attaching to new environments.
+
 ## Regenerate the workspace tree
 
 ```bash
