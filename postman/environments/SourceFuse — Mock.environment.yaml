@@ -2,19 +2,19 @@ name: SourceFuse — Mock
 color: "#6f42c1"
 values:
   - key: baseUrl
-    value: "https://7f7bbc29-eb2e-482b-8de0-ccdecc30fb7d.mock.pstmn.io"
+    value: "https://eb3bef57-f889-4610-9359-f881d2b5afeb.mock.pstmn.io"
     enabled: true
   - key: coreBankingUrl
-    value: "https://91661033-a857-4792-adc9-5454c6140670.mock.pstmn.io"
+    value: "https://c63f0a43-a18f-42bb-a31b-2eeda6af1521.mock.pstmn.io"
     enabled: true
   - key: paymentProcessorUrl
-    value: "https://dc30ad35-8b99-4f26-bb39-5f60a0833ff0.mock.pstmn.io"
+    value: "https://f3d7ca79-3cfe-4371-82c1-a09b4556b13b.mock.pstmn.io"
     enabled: true
   - key: notificationsUrl
-    value: "https://e47b9058-c3f2-499c-b884-1fabfe1a5dc8.mock.pstmn.io"
+    value: "https://aafadb97-ca84-4b94-8a7f-f0ea6ed7874c.mock.pstmn.io"
     enabled: true
   - key: legacyCustomerUrl
-    value: "https://bb95cb8c-7501-449d-bebe-f885be2cd27c.mock.pstmn.io"
+    value: "https://c6893627-b255-40cf-888c-8ce13c904ded.mock.pstmn.io"
     enabled: true
   - key: authToken
     value: "mock-bearer-token"

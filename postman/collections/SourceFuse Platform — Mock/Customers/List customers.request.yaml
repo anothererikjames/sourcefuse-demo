@@ -1,9 +1,0 @@
-$kind: http-request
-url: "{{baseUrl}}/customers?limit=5"
-method: GET
-headers:
-  Authorization: Bearer {{authToken}}
-queryParams:
-  limit: "5"
-examples: ./.resources/List customers.resources/examples
-order: 1000

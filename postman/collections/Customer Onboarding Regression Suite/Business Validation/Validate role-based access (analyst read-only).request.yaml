@@ -9,7 +9,7 @@ scripts:
   - type: preRequest
     code: |-
       // In real env, analystToken is issued with role=analyst (read-only)
-      pm.collectionVariables.set('analystToken', 'eyJhbGciOiJSUzI1NiIsInJvbGUiOiJhbmFseXN0In0.demo.sig');
+      pm.collectionVariables.set('analystToken', 'mock_oauth_at_analyst_readonly_not_a_real_token');
     language: text/javascript
   - type: afterResponse
     code: |-

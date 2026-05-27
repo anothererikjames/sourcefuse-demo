@@ -1,9 +1,0 @@
-$kind: http-request
-url: "{{baseUrl}}/accounts/:accountId/ledger"
-method: GET
-headers:
-  Authorization: Bearer {{authToken}}
-pathVariables:
-  accountId: ""
-examples: ./.resources/Get account ledger.resources/examples
-order: 3000

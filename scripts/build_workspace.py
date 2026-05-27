@@ -514,7 +514,7 @@ pm.test('Tenant scoping respected', function () {
         """
 pm.test('Access token returned', function () {
     const body = pm.response.json();
-    pm.expect(body.access_token).to.be.a('string').and.match(/^eyJ/);
+    pm.expect(body.access_token).to.be.a('string').and.match(/^mock_oauth_/);
     pm.expect(body.token_type).to.eql('Bearer');
     pm.expect(body.expires_in).to.be.a('number').and.above(60);
 });
@@ -546,7 +546,7 @@ pm.collectionVariables.set('serviceToken', tok.access_token);
                     status_code=200,
                     response_headers={"Content-Type": "application/json"},
                     response_body={
-                        "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.demo.signature",
+                        "access_token": "mock_oauth_at_demo_001_not_a_real_token",
                         "token_type": "Bearer",
                         "expires_in": 3600,
                         "scope": "customers.write accounts.write payments.write",
@@ -1039,7 +1039,7 @@ pm.test('State transitions are monotonic (no rollback after verified)', function
                 "Authorization": "Bearer {{analystToken}}",
                 "X-Tenant-Id": "{{tenantId}}",
             },
-            pre_script="// In real env, analystToken is issued with role=analyst (read-only)\npm.collectionVariables.set('analystToken', 'eyJhbGciOiJSUzI1NiIsInJvbGUiOiJhbmFseXN0In0.demo.sig');",
+            pre_script="// In real env, analystToken is issued with role=analyst (read-only)\npm.collectionVariables.set('analystToken', 'mock_oauth_at_analyst_readonly_not_a_real_token');",
             test_script="""\
 pm.test('Analyst is forbidden from destructive op', function () {
     pm.expect(pm.response.code).to.eql(403);

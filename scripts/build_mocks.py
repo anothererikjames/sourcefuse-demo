@@ -217,7 +217,7 @@ def build_platform_collection() -> dict:
             status_code=200,
             request_body={"grant_type": "client_credentials", "client_id": "demo-client", "client_secret": "***", "scope": "customers.write accounts.write payments.write"},
             response_body={
-                "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.demo.signature",
+                "access_token": "mock_oauth_at_demo_001_not_a_real_token",
                 "token_type": "Bearer",
                 "expires_in": 3600,
                 "scope": "customers.write accounts.write payments.write",
