@@ -1,0 +1,435 @@
+openapi: 3.0.3
+info:
+  title: SourceFuse Demo API
+  version: 1.0.0
+  description: |
+    Project & task management API for the SourceFuse Postman demo.
+    Generic SaaS-style domain: workspaces, projects, tasks, comments.
+  contact:
+    name: SourceFuse Demo Team
+    email: demo@sourcefuse.example.com
+servers:
+  - url: https://api.sourcefuse-demo.example.com/v1
+    description: Production
+  - url: https://api-staging.sourcefuse-demo.example.com/v1
+    description: Staging
+  - url: https://api-dev.sourcefuse-demo.example.com/v1
+    description: Development
+tags:
+  - name: Workspaces
+  - name: Projects
+  - name: Tasks
+  - name: Comments
+  - name: Members
+paths:
+  /health:
+    get:
+      tags: [Workspaces]
+      summary: Health check
+      operationId: healthCheck
+      responses:
+        '200': { description: Healthy }
+
+  /workspaces:
+    get:
+      tags: [Workspaces]
+      summary: List workspaces
+      operationId: listWorkspaces
+      parameters:
+        - { name: limit, in: query, schema: { type: integer, default: 25, maximum: 100 } }
+        - { name: cursor, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Workspaces page
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WorkspacePage' }
+    post:
+      tags: [Workspaces]
+      summary: Create workspace
+      operationId: createWorkspace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/WorkspaceCreate' }
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Workspace' }
+
+  /workspaces/{workspaceId}:
+    parameters:
+      - { name: workspaceId, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [Workspaces]
+      summary: Get workspace
+      operationId: getWorkspace
+      responses:
+        '200':
+          description: Workspace
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Workspace' }
+        '404': { description: Not found }
+    patch:
+      tags: [Workspaces]
+      summary: Update workspace
+      operationId: updateWorkspace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/WorkspaceUpdate' }
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Workspace' }
+    delete:
+      tags: [Workspaces]
+      summary: Delete workspace
+      operationId: deleteWorkspace
+      responses:
+        '204': { description: Deleted }
+
+  /workspaces/{workspaceId}/members:
+    parameters:
+      - { name: workspaceId, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [Members]
+      summary: List workspace members
+      operationId: listMembers
+      responses:
+        '200':
+          description: Members
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Member' }
+    post:
+      tags: [Members]
+      summary: Add workspace member
+      operationId: addMember
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MemberCreate' }
+      responses:
+        '201':
+          description: Added
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Member' }
+
+  /workspaces/{workspaceId}/projects:
+    parameters:
+      - { name: workspaceId, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [Projects]
+      summary: List projects in workspace
+      operationId: listProjects
+      parameters:
+        - { name: status, in: query, schema: { type: string, enum: [active, archived] } }
+        - { name: limit, in: query, schema: { type: integer, default: 25 } }
+        - { name: cursor, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Projects page
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProjectPage' }
+    post:
+      tags: [Projects]
+      summary: Create project
+      operationId: createProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ProjectCreate' }
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Project' }
+
+  /projects/{projectId}:
+    parameters:
+      - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [Projects]
+      summary: Get project
+      operationId: getProject
+      responses:
+        '200':
+          description: Project
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Project' }
+    patch:
+      tags: [Projects]
+      summary: Update project
+      operationId: updateProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ProjectUpdate' }
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Project' }
+    delete:
+      tags: [Projects]
+      summary: Delete project
+      operationId: deleteProject
+      responses:
+        '204': { description: Deleted }
+
+  /projects/{projectId}/tasks:
+    parameters:
+      - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [Tasks]
+      summary: List tasks in project
+      operationId: listTasks
+      parameters:
+        - { name: status, in: query, schema: { type: string, enum: [todo, in_progress, blocked, done] } }
+        - { name: assignee, in: query, schema: { type: string } }
+        - { name: limit, in: query, schema: { type: integer, default: 25 } }
+        - { name: cursor, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Tasks page
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskPage' }
+    post:
+      tags: [Tasks]
+      summary: Create task
+      operationId: createTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/TaskCreate' }
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Task' }
+
+  /tasks/{taskId}:
+    parameters:
+      - { name: taskId, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [Tasks]
+      summary: Get task
+      operationId: getTask
+      responses:
+        '200':
+          description: Task
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Task' }
+    patch:
+      tags: [Tasks]
+      summary: Update task
+      operationId: updateTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/TaskUpdate' }
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Task' }
+    delete:
+      tags: [Tasks]
+      summary: Delete task
+      operationId: deleteTask
+      responses:
+        '204': { description: Deleted }
+
+  /tasks/{taskId}/comments:
+    parameters:
+      - { name: taskId, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [Comments]
+      summary: List comments on a task
+      operationId: listComments
+      responses:
+        '200':
+          description: Comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Comment' }
+    post:
+      tags: [Comments]
+      summary: Add comment to a task
+      operationId: addComment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CommentCreate' }
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Comment' }
+
+components:
+  schemas:
+    Workspace:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        slug: { type: string }
+        description: { type: string }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+      required: [id, name, slug]
+    WorkspaceCreate:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string }
+        slug: { type: string }
+        description: { type: string }
+    WorkspaceUpdate:
+      type: object
+      properties:
+        name: { type: string }
+        description: { type: string }
+    WorkspacePage:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/Workspace' }
+        nextCursor: { type: string, nullable: true }
+
+    Project:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        workspaceId: { type: string, format: uuid }
+        name: { type: string }
+        key: { type: string, description: Short project key like ENG or MKT }
+        status: { type: string, enum: [active, archived] }
+        description: { type: string }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+      required: [id, workspaceId, name, key, status]
+    ProjectCreate:
+      type: object
+      required: [name, key]
+      properties:
+        name: { type: string }
+        key: { type: string }
+        description: { type: string }
+    ProjectUpdate:
+      type: object
+      properties:
+        name: { type: string }
+        description: { type: string }
+        status: { type: string, enum: [active, archived] }
+    ProjectPage:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/Project' }
+        nextCursor: { type: string, nullable: true }
+
+    Task:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        projectId: { type: string, format: uuid }
+        title: { type: string }
+        description: { type: string }
+        status: { type: string, enum: [todo, in_progress, blocked, done] }
+        priority: { type: string, enum: [low, medium, high, urgent] }
+        assignee: { type: string, description: Member id or email }
+        dueDate: { type: string, format: date, nullable: true }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+      required: [id, projectId, title, status]
+    TaskCreate:
+      type: object
+      required: [title]
+      properties:
+        title: { type: string }
+        description: { type: string }
+        status: { type: string, enum: [todo, in_progress, blocked, done], default: todo }
+        priority: { type: string, enum: [low, medium, high, urgent], default: medium }
+        assignee: { type: string }
+        dueDate: { type: string, format: date }
+    TaskUpdate:
+      type: object
+      properties:
+        title: { type: string }
+        description: { type: string }
+        status: { type: string, enum: [todo, in_progress, blocked, done] }
+        priority: { type: string, enum: [low, medium, high, urgent] }
+        assignee: { type: string }
+        dueDate: { type: string, format: date, nullable: true }
+    TaskPage:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/Task' }
+        nextCursor: { type: string, nullable: true }
+
+    Comment:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        taskId: { type: string, format: uuid }
+        author: { type: string }
+        body: { type: string }
+        createdAt: { type: string, format: date-time }
+      required: [id, taskId, author, body]
+    CommentCreate:
+      type: object
+      required: [author, body]
+      properties:
+        author: { type: string }
+        body: { type: string }
+
+    Member:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        email: { type: string, format: email }
+        name: { type: string }
+        role: { type: string, enum: [owner, admin, member, guest] }
+        joinedAt: { type: string, format: date-time }
+      required: [id, email, role]
+    MemberCreate:
+      type: object
+      required: [email, role]
+      properties:
+        email: { type: string, format: email }
+        name: { type: string }
+        role: { type: string, enum: [owner, admin, member, guest] }
