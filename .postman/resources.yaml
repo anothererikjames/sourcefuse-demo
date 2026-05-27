@@ -9,6 +9,16 @@ localResources:
     - ../postman/collections/Core Banking — Mock
     - ../postman/collections/Legacy Customer Platform — Mock
     - ../postman/collections/Payment Processor — Mock
+    - ../postman/collections/AI Generated Workflows — Assertions
+    - ../postman/collections/AI Generated Workflows — Mock Scenarios
+    - ../postman/collections/AI Generated Workflows — Regression Suite
+    - ../postman/collections/CI Regression Pipeline
+    - ../postman/collections/Mocks — Core Banking
+    - ../postman/collections/Mocks — Legacy Customer Platform
+    - ../postman/collections/Mocks — Notification Service
+    - ../postman/collections/Mocks — Payment Processor
+    - ../postman/collections/OpenAPI Synchronization Examples
+    - ../postman/collections/Performance Smoke Validation
 cloudResources:
   collections:
     ../postman/collections/SourceFuse Platform — Mock: 52238111-030e8873-178d-42bf-bfae-2430a1840bec
@@ -16,3 +26,15 @@ cloudResources:
     ../postman/collections/Core Banking — Mock: 52238111-2a05e833-e689-4482-a98f-a59b353ce9af
     ../postman/collections/Legacy Customer Platform — Mock: 52238111-2b59a1db-a80e-49ec-ae4c-04a361f71e07
     ../postman/collections/Payment Processor — Mock: 52238111-f2b36595-8095-4b54-9d48-acad526a1633
+    ../postman/collections/AI Generated Workflows — Assertions: 52238111-02b1561c-d5ed-486d-b58a-933e0c74297f
+    ../postman/collections/AI Generated Workflows — Mock Scenarios: 52238111-b07a26c2-17b6-40c5-9424-0c7d466b4dbc
+    ../postman/collections/AI Generated Workflows — Regression Suite: 52238111-9b86a0e7-94c9-4763-980f-008059d7f0f3
+    ../postman/collections/CI Regression Pipeline: 52238111-3f24e2ef-53d2-4c3a-b3fe-bb986093b050
+    ../postman/collections/Mocks — Core Banking: 52238111-88cdf76d-fe87-473e-ac55-5979f834e2b8
+    ../postman/collections/Mocks — Legacy Customer Platform: 52238111-711a83ec-e608-41bd-8ef5-ce940c67cfa8
+    ../postman/collections/Mocks — Notification Service: 52238111-41f10f6c-54dc-4187-b6fa-98793430292c
+    ../postman/collections/Mocks — Payment Processor: 52238111-c1c383dc-9e07-46c7-ad67-f14a1396ee12
+    ../postman/collections/OpenAPI Synchronization Examples: 52238111-c3d31213-3265-4a3c-9161-054a9ccb0c39
+    ../postman/collections/Performance Smoke Validation: 52238111-280f6ccd-33ef-4a7e-9a98-faae9834f592
+  specs:
+    ../openapi.yaml: 3bbde03b-d4e8-4531-9db8-0c9f7237301b
