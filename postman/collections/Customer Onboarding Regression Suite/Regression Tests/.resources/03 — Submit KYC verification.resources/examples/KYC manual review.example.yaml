@@ -1,0 +1,30 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/customers/{{customerId}}/kyc"
+  method: POST
+response:
+  statusCode: 202
+  statusText: OK
+  body:
+    type: raw
+    content: |-
+      {
+        "caseId": "kyc_77ab44cc",
+        "customerId": "c2c8c0f6-7d6d-4ad9-9c1a-9b6a3a3f1b22",
+        "provider": "jumio",
+        "state": "manual_review",
+        "factors": [
+          {
+            "type": "document",
+            "result": "pass"
+          },
+          {
+            "type": "liveness",
+            "result": "manual"
+          }
+        ]
+      }
+    options:
+      raw:
+        language: json
+order: 1000

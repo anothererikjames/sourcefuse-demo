@@ -1,0 +1,24 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/customers/{{externalId}}"
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: raw
+    content: |-
+      {
+        "externalId": "ext_1722988800000",
+        "firstName": "Alex",
+        "lastName": "Diaz",
+        "address": {
+          "city": "San Francisco",
+          "state": "CA"
+        },
+        "legacyAccountNumber": "0001234567"
+      }
+    options:
+      raw:
+        language: json
+order: 1000

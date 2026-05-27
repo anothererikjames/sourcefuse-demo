@@ -1,0 +1,7 @@
+$kind: collection
+description: |-
+  # 📨 Notification Service Mock
+
+  Simulated multi-channel notification service. Enables shift-left testing of customer comms.
+variables:
+  baseUrl: "{{notificationsUrl}}"

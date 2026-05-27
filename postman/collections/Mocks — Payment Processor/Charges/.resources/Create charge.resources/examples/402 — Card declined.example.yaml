@@ -1,0 +1,21 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/charges"
+  method: POST
+response:
+  statusCode: 402
+  statusText: OK
+  body:
+    type: raw
+    content: |-
+      {
+        "error": {
+          "type": "card_error",
+          "code": "card_declined",
+          "decline_code": "generic_decline"
+        }
+      }
+    options:
+      raw:
+        language: json
+order: 1000

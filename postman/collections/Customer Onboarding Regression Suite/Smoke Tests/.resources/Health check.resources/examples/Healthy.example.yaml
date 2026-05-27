@@ -1,0 +1,24 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/health"
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: X-Correlation-Id
+      value: cor_demo
+  body:
+    type: raw
+    content: |-
+      {
+        "status": "ok",
+        "buildSha": "a1b2c3d4e5",
+        "uptimeSeconds": 84123
+      }
+    options:
+      raw:
+        language: json
+order: 1000

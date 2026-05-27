@@ -1,0 +1,23 @@
+$kind: http-request
+description: Queues a notification for delivery.
+url: "{{baseUrl}}/v1/notifications"
+method: POST
+headers:
+  Authorization: "Bearer {{authToken}}"
+  Content-Type: application/json
+body:
+  type: raw
+  content: |-
+    {
+      "channel": "email",
+      "template": "onboarding.welcome.v3",
+      "to": "{{customerEmail}}",
+      "data": {
+        "firstName": "Alex"
+      }
+    }
+  options:
+    raw:
+      language: json
+order: 1000
+examples: ./.resources/Send notification.resources/examples

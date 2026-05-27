@@ -1,0 +1,23 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/charges"
+  method: POST
+response:
+  statusCode: 429
+  statusText: OK
+  headers:
+    - key: Retry-After
+      value: "5"
+  body:
+    type: raw
+    content: |-
+      {
+        "error": {
+          "type": "rate_limit_error",
+          "message": "Too many requests"
+        }
+      }
+    options:
+      raw:
+        language: json
+order: 1000

@@ -1,0 +1,51 @@
+name: API Governance
+
+# Reusable governance: lint the OpenAPI spec and detect breaking changes on every PR.
+# Demonstrates "API rules as code" — same ruleset applies to every API in the org.
+
+on:
+  pull_request:
+    paths:
+      - "openapi.yaml"
+      - ".spectral.yaml"
+      - "postman/specs/**"
+  push:
+    branches: [main]
+    paths:
+      - "openapi.yaml"
+
+jobs:
+  lint:
+    name: OpenAPI Lint (Spectral)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Spectral
+        uses: stoplightio/spectral-action@latest
+        with:
+          file_glob: "openapi.yaml"
+          spectral_ruleset: ".spectral.yaml"
+
+  breaking-changes:
+    name: Detect breaking changes (oasdiff)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Get base spec
+        run: |
+          git show "origin/${{ github.base_ref }}:openapi.yaml" > /tmp/openapi.base.yaml || true
+      - name: Diff specs
+        uses: oasdiff/oasdiff-action/diff@main
+        with:
+          base: /tmp/openapi.base.yaml
+          revision: openapi.yaml
+          format: text
+      - name: Fail on breaking changes
+        uses: oasdiff/oasdiff-action/breaking@main
+        with:
+          base: /tmp/openapi.base.yaml
+          revision: openapi.yaml
+          fail-on-diff: true

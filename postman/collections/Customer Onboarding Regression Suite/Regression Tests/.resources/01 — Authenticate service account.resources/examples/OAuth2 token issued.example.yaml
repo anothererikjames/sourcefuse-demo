@@ -1,0 +1,23 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/oauth2/token"
+  method: POST
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    - key: Content-Type
+      value: application/json
+  body:
+    type: raw
+    content: |-
+      {
+        "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.demo.signature",
+        "token_type": "Bearer",
+        "expires_in": 3600,
+        "scope": "customers.write accounts.write payments.write"
+      }
+    options:
+      raw:
+        language: json
+order: 1000

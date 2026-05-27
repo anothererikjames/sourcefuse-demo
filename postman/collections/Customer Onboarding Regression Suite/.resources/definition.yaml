@@ -1,0 +1,38 @@
+$kind: collection
+description: |-
+  # Customer Onboarding Regression Suite
+
+  Enterprise-grade regression suite simulating the complete customer onboarding
+  workflow across the SourceFuse banking platform. Designed for CI/CD execution.
+
+  ## Workflow
+  1. Authenticate user (service account / OAuth2 client credentials)
+  2. Create customer record (PII validated)
+  3. Submit KYC verification
+  4. Create bank account (savings/checking)
+  5. Retrieve account details + funding state
+  6. Execute initial funding payment
+  7. Send welcome notification
+  8. Validate downstream state (audit log, ledger, analytics)
+  9. Run negative / failure path scenarios
+
+  ## Folders
+  - **Smoke Tests** — health + critical-path requests, <30s run
+  - **Regression Tests** — full happy-path business flow
+  - **Business Validation** — state-machine, KYC, ledger invariants
+  - **Negative Testing** — invalid payload / unauthorized / dependency outage
+  - **Edge Cases** — concurrency, idempotency, pagination boundaries, decimal precision
+
+  ## CI/CD
+  Designed to be executed via Postman CLI (`postman collection run`) or Newman
+  in GitHub Actions. See `.github/workflows/ci-regression.yml`.
+variables:
+  baseUrl: "{{baseUrl}}"
+  tenantId: "{{tenantId}}"
+  p95BudgetMs: "{{p95BudgetMs}}"
+auth:
+  - id: "11111111-1111-4111-8111-111111111111"
+    type: bearer
+    name: Service Account
+    credentials:
+      token: "{{authToken}}"

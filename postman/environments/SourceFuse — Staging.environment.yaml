@@ -1,0 +1,34 @@
+name: SourceFuse — Staging
+color: "#cc8a00"
+values:
+  - key: baseUrl
+    value: "https://api-staging.sourcefuse-demo.example.com/v1"
+    enabled: true
+  - key: coreBankingUrl
+    value: "https://core-banking-staging.sourcefuse-demo.example.com"
+    enabled: true
+  - key: paymentProcessorUrl
+    value: "https://payments-staging.sourcefuse-demo.example.com"
+    enabled: true
+  - key: notificationsUrl
+    value: "https://notifications-staging.sourcefuse-demo.example.com"
+    enabled: true
+  - key: legacyCustomerUrl
+    value: "https://legacy-staging.sourcefuse-demo.example.com"
+    enabled: true
+  - key: authToken
+    value: "{{vault:sourcefuse_staging_token}}"
+    enabled: true
+    type: secret
+  - key: tenantId
+    value: tnt_staging_001
+    enabled: true
+  - key: kycProvider
+    value: jumio
+    enabled: true
+  - key: p95BudgetMs
+    value: "700"
+    enabled: true
+  - key: featureFlag.aiAssertions
+    value: "true"
+    enabled: true

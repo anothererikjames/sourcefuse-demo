@@ -1,0 +1,18 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/notifications"
+  method: POST
+response:
+  statusCode: 202
+  statusText: OK
+  body:
+    type: raw
+    content: |-
+      {
+        "notificationId": "ntf_001",
+        "status": "queued"
+      }
+    options:
+      raw:
+        language: json
+order: 1000

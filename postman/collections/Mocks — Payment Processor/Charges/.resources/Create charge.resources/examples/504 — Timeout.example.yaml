@@ -1,0 +1,20 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/charges"
+  method: POST
+response:
+  statusCode: 504
+  statusText: OK
+  body:
+    type: raw
+    content: |-
+      {
+        "error": {
+          "type": "api_error",
+          "code": "timeout"
+        }
+      }
+    options:
+      raw:
+        language: json
+order: 1000

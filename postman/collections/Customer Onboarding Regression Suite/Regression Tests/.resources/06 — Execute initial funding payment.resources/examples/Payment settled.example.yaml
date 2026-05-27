@@ -1,0 +1,48 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/payments"
+  method: POST
+response:
+  statusCode: 201
+  statusText: OK
+  body:
+    type: raw
+    content: |-
+      {
+        "id": "pmt_99a01ff2",
+        "type": "ach_pull",
+        "amount": "250.00",
+        "currency": "USD",
+        "destinationAccountId": "acc_4f3b1e22",
+        "status": "settled",
+        "statusHistory": [
+          {
+            "status": "pending",
+            "at": "2026-05-27T17:14:14Z"
+          },
+          {
+            "status": "authorized",
+            "at": "2026-05-27T17:14:14Z"
+          },
+          {
+            "status": "settled",
+            "at": "2026-05-27T17:14:15Z"
+          }
+        ],
+        "ledgerEntries": [
+          {
+            "account": "external_clearing",
+            "direction": "debit",
+            "amount": "250.00"
+          },
+          {
+            "account": "acc_4f3b1e22",
+            "direction": "credit",
+            "amount": "250.00"
+          }
+        ]
+      }
+    options:
+      raw:
+        language: json
+order: 1000

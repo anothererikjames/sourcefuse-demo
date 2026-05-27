@@ -1,0 +1,16 @@
+$kind: http-request
+description: "API contract: limit=0 must be rejected (not silently coerced)."
+url: "{{baseUrl}}/customers?limit=0"
+method: GET
+headers:
+  Authorization: "Bearer {{serviceToken}}"
+  X-Tenant-Id: "{{tenantId}}"
+queryParams:
+  - key: limit
+    value: "0"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('400 Bad Request', function () { pm.expect(pm.response.code).to.eql(400); });
+    language: text/javascript
+order: 1200

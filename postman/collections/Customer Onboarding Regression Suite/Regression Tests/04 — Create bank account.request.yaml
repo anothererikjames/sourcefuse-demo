@@ -1,0 +1,71 @@
+$kind: http-request
+description: Opens a new account for the customer. Requires verified KYC.
+url: "{{baseUrl}}/customers/{{customerId}}/accounts"
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: "Bearer {{serviceToken}}"
+  X-Tenant-Id: "{{tenantId}}"
+  X-Correlation-Id: "{{correlationId}}"
+body:
+  type: raw
+  content: |-
+    {
+      "type": "checking",
+      "currency": "USD",
+      "nickname": "Primary Checking"
+    }
+  options:
+    raw:
+      language: json
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is success (2xx)', function () {
+          pm.expect(pm.response.code).to.be.within(200, 299);
+      });
+    
+      pm.test('Response time below SLO budget (p95)', function () {
+          pm.expect(pm.response.responseTime, 'p95 budget 600ms').to.be.below(600);
+      });
+    
+      pm.test('Content-Type is application/json', function () {
+          if (pm.response.code !== 204) {
+              pm.expect(pm.response.headers.get('Content-Type') || '').to.include('application/json');
+          }
+      });
+    
+      pm.test('Response is valid JSON', function () {
+          if (pm.response.code !== 204) pm.response.to.be.json;
+      });
+    
+      pm.test('Correlation ID header present', function () {
+          pm.expect(pm.response.headers.get('X-Correlation-Id'), 'X-Correlation-Id header').to.be.a('string');
+      });
+    
+      const body = pm.response.json();
+      pm.collectionVariables.set('accountId', body.id);
+    
+      pm.test('Account number conforms to format', function () {
+          pm.expect(body.accountNumber).to.match(/^\d{10,12}$/);
+      });
+    
+      pm.test('Account type is allowed', function () {
+          pm.expect(body.type).to.be.oneOf(['checking','savings','money_market']);
+      });
+    
+      pm.test('Status is open', function () {
+          pm.expect(body.status).to.eql('open');
+      });
+    
+      pm.test('Balance starts at zero with currency', function () {
+          pm.expect(body.balance.amount).to.eql('0.00');
+          pm.expect(body.balance.currency).to.match(/^[A-Z]{3}$/);
+      });
+    
+      pm.test('Linked to authenticated customer', function () {
+          pm.expect(body.customerId).to.eql(pm.collectionVariables.get('customerId'));
+      });
+    language: text/javascript
+order: 1300
+examples: ./.resources/04 — Create bank account.resources/examples

@@ -1,0 +1,20 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/accounts/{{accountId}}"
+  method: GET
+response:
+  statusCode: 409
+  statusText: OK
+  body:
+    type: raw
+    content: |-
+      {
+        "error": {
+          "code": "account_closed",
+          "closedAt": "2026-01-15T00:00:00Z"
+        }
+      }
+    options:
+      raw:
+        language: json
+order: 1000

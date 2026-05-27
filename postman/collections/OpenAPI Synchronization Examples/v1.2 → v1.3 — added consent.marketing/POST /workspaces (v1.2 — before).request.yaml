@@ -1,0 +1,24 @@
+$kind: http-request
+description: "**Before:** schema v1.2 — no `consent.marketing`."
+url: "{{baseUrl}}/workspaces"
+method: POST
+headers:
+  Authorization: "Bearer {{authToken}}"
+  Content-Type: application/json
+body:
+  type: raw
+  content: |-
+    {
+      "name": "Acme",
+      "slug": "acme",
+      "description": "v1.2 payload"
+    }
+  options:
+    raw:
+      language: json
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Created', function () { pm.expect(pm.response.code).to.eql(201); });
+    language: text/javascript
+order: 1000

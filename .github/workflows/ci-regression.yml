@@ -1,0 +1,81 @@
+name: CI Regression Pipeline
+
+# Shift-left API regression. Runs the Customer Onboarding Regression Suite
+# on every PR and push to main, against the QA environment.
+#
+# Quality gate:
+#   - 100% of contract / business / negative / edge-case assertions pass
+#   - p95 response time under environment p95BudgetMs
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Postman environment to run against
+        required: true
+        default: SourceFuse — QA
+        type: choice
+        options:
+          - SourceFuse — Dev
+          - SourceFuse — QA
+          - SourceFuse — Staging
+
+jobs:
+  regression:
+    name: Regression suite (${{ github.event.inputs.environment || 'SourceFuse — QA' }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+          echo "$HOME/.postman/cli/bin" >> $GITHUB_PATH
+
+      - name: Login to Postman
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+        run: postman login --with-api-key "$POSTMAN_API_KEY"
+
+      - name: Run regression suite — Smoke
+        run: |
+          postman collection run \
+            "postman/collections/Customer Onboarding Regression Suite" \
+            --folder "Smoke Tests" \
+            --environment "postman/environments/${{ github.event.inputs.environment || 'SourceFuse — QA' }}.environment.yaml" \
+            --reporters cli,junit \
+            --reporter-junit-export reports/junit-smoke.xml
+
+      - name: Run regression suite — Full
+        run: |
+          postman collection run \
+            "postman/collections/Customer Onboarding Regression Suite" \
+            --environment "postman/environments/${{ github.event.inputs.environment || 'SourceFuse — QA' }}.environment.yaml" \
+            --reporters cli,junit,htmlextra \
+            --reporter-junit-export reports/junit-regression.xml \
+            --reporter-htmlextra-export reports/regression.html
+
+      - name: Publish JUnit results
+        if: always()
+        uses: mikepenz/action-junit-report@v4
+        with:
+          report_paths: "reports/junit-*.xml"
+          check_name: Postman Regression
+          fail_on_failure: true
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-report
+          path: reports/
+          retention-days: 14

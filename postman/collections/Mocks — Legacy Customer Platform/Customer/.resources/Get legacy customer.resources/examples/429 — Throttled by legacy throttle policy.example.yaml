@@ -1,0 +1,22 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/customers/{{externalId}}"
+  method: GET
+response:
+  statusCode: 429
+  statusText: OK
+  headers:
+    - key: Retry-After
+      value: "60"
+  body:
+    type: raw
+    content: |-
+      {
+        "error": {
+          "code": "legacy_throttled"
+        }
+      }
+    options:
+      raw:
+        language: json
+order: 1000

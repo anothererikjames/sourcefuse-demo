@@ -1,0 +1,72 @@
+$kind: http-request
+description: Initiates KYC verification with the configured provider.
+url: "{{baseUrl}}/customers/{{customerId}}/kyc"
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: "Bearer {{serviceToken}}"
+  X-Tenant-Id: "{{tenantId}}"
+  X-Correlation-Id: "{{correlationId}}"
+body:
+  type: raw
+  content: |-
+    {
+      "documentType": "drivers_license",
+      "documentCountry": "US",
+      "documentFrontUrl": "https://uploads.sourcefuse-demo.example.com/demo/dl-front.jpg",
+      "documentBackUrl": "https://uploads.sourcefuse-demo.example.com/demo/dl-back.jpg",
+      "selfieUrl": "https://uploads.sourcefuse-demo.example.com/demo/selfie.jpg"
+    }
+  options:
+    raw:
+      language: json
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is success (2xx)', function () {
+          pm.expect(pm.response.code).to.be.within(200, 299);
+      });
+    
+      pm.test('Response time below SLO budget (p95)', function () {
+          pm.expect(pm.response.responseTime, 'p95 budget 600ms').to.be.below(600);
+      });
+    
+      pm.test('Content-Type is application/json', function () {
+          if (pm.response.code !== 204) {
+              pm.expect(pm.response.headers.get('Content-Type') || '').to.include('application/json');
+          }
+      });
+    
+      pm.test('Response is valid JSON', function () {
+          if (pm.response.code !== 204) pm.response.to.be.json;
+      });
+    
+      pm.test('Correlation ID header present', function () {
+          pm.expect(pm.response.headers.get('X-Correlation-Id'), 'X-Correlation-Id header').to.be.a('string');
+      });
+    
+      const body = pm.response.json();
+      pm.collectionVariables.set('kycCaseId', body.caseId);
+    
+      pm.test('KYC case id returned', function () {
+          pm.expect(body.caseId).to.match(/^kyc_/);
+      });
+    
+      pm.test('KYC state is one of the allowed values', function () {
+          pm.expect(body.state).to.be.oneOf(['submitted','manual_review','verified','rejected']);
+      });
+    
+      pm.test('Verification factors recorded', function () {
+          pm.expect(body.factors).to.be.an('array').that.is.not.empty;
+          body.factors.forEach((f) => {
+              pm.expect(f.type).to.be.oneOf(['document','liveness','sanctions','pep','address']);
+              pm.expect(f.result).to.be.oneOf(['pass','fail','manual']);
+          });
+      });
+    
+      pm.test('Provider matches environment config', function () {
+          pm.expect(body.provider).to.eql(pm.environment.get('kycProvider'));
+      });
+    language: text/javascript
+order: 1200
+examples: ./.resources/03 — Submit KYC verification.resources/examples

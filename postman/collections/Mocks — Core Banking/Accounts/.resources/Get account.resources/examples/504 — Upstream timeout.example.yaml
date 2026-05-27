@@ -1,0 +1,20 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/accounts/{{accountId}}"
+  method: GET
+response:
+  statusCode: 504
+  statusText: OK
+  body:
+    type: raw
+    content: |-
+      {
+        "error": {
+          "code": "upstream_timeout",
+          "retryable": true
+        }
+      }
+    options:
+      raw:
+        language: json
+order: 1000

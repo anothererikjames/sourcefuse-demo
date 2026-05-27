@@ -1,0 +1,7 @@
+$kind: collection
+description: |-
+  # 🏛️ Legacy Customer Platform Mock
+
+  Simulated legacy customer platform (SOAP-wrapped behind REST shim). Includes flaky behaviors (slow responses, intermittent timeouts, partial data) so the new platform can be tested against realistic legacy degradation.
+variables:
+  baseUrl: "{{legacyCustomerUrl}}"

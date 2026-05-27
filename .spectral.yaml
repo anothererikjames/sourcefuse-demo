@@ -1,0 +1,47 @@
+extends:
+  - spectral:oas
+
+# Reusable governance ruleset — applied to every API in the org via the api-governance workflow.
+# Keep rules small, opinionated, and explainable so they hold up in a demo.
+
+rules:
+  # Operations must have operationId
+  operation-operationId: error
+  operation-operationId-unique: error
+
+  # Every operation must be tagged so it shows up in the right product area
+  operation-tag-defined: error
+  operation-tags: error
+
+  # Servers must be defined
+  oas3-server-not-example.com: warn
+
+  # Schema rules
+  oas3-valid-media-example: warn
+
+  # SourceFuse-specific: descriptions are mandatory above 5 chars
+  operation-description:
+    description: Every operation needs a real description (>10 chars)
+    given: $.paths.*[get,post,put,patch,delete]
+    severity: error
+    then:
+      field: description
+      function: length
+      functionOptions:
+        min: 10
+
+  # SourceFuse-specific: list endpoints must support pagination
+  pagination-on-list-endpoints:
+    description: List endpoints (returning arrays) must support cursor-based pagination
+    given: $.paths[?(@property.match(/^\/[^\/]+$/))].get.parameters
+    severity: warn
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            type: object
+            properties:
+              name:
+                enum: [cursor, limit, page, pageSize]

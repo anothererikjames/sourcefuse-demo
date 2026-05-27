@@ -1,0 +1,17 @@
+$kind: http-request
+description: "AI-generated mock: returns a freshly created customer."
+url: "{{baseUrl}}/customers"
+method: POST
+body:
+  type: raw
+  content: |-
+    {
+      "email": "demo@sourcefuse.example.com",
+      "firstName": "Pat",
+      "lastName": "Lee"
+    }
+  options:
+    raw:
+      language: json
+order: 1000
+examples: ./.resources/Mock — happy path customer creation.resources/examples

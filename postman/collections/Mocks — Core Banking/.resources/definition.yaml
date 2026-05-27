@@ -1,0 +1,9 @@
+$kind: collection
+description: |-
+  # 🏦 Core Banking Mock
+
+  Simulated core banking system. Use this as a mock server when the real core banking downstream is unavailable — frontend and QA can build/test in parallel.
+
+  **Scenarios included:** success, validation failure, account closed, timeout, partial data, rate limit.
+variables:
+  baseUrl: "{{coreBankingUrl}}"

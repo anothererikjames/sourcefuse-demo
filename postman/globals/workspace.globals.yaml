@@ -1,0 +1,17 @@
+name: workspace.globals
+values:
+  - key: demo.workspace
+    value: SourceFuse Demo
+    enabled: true
+  - key: demo.org
+    value: SourceFuse
+    enabled: true
+  - key: demo.contact
+    value: "demo@sourcefuse.example.com"
+    enabled: true
+  - key: p95BudgetMs
+    value: "600"
+    enabled: true
+  - key: schemaVersion
+    value: "2026-05-01"
+    enabled: true

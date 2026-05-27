@@ -1,0 +1,72 @@
+name: Performance Smoke
+
+# Runs after every deploy to staging/production, plus on a 15-minute schedule.
+# Validates p95 latency, payload size and cache headers against the live environment.
+# Not a K6 replacement — this is the shift-left signal before perf testing.
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment to validate
+        required: true
+        default: SourceFuse — Staging
+        type: choice
+        options:
+          - SourceFuse — Staging
+          - SourceFuse — Production
+  workflow_run:
+    workflows: ["Deploy"]
+    types: [completed]
+
+jobs:
+  smoke:
+    name: Performance smoke (${{ github.event.inputs.environment || 'SourceFuse — Staging' }})
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+          echo "$HOME/.postman/cli/bin" >> $GITHUB_PATH
+
+      - name: Login to Postman
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+        run: postman login --with-api-key "$POSTMAN_API_KEY"
+
+      - name: Performance smoke validation
+        run: |
+          postman collection run \
+            "postman/collections/Performance Smoke Validation" \
+            --environment "postman/environments/${{ github.event.inputs.environment || 'SourceFuse — Staging' }}.environment.yaml" \
+            --iteration-count 5 \
+            --delay-request 250 \
+            --reporters cli,junit,htmlextra \
+            --reporter-junit-export reports/junit-perf.xml \
+            --reporter-htmlextra-export reports/perf.html
+
+      - name: Publish results
+        if: always()
+        uses: mikepenz/action-junit-report@v4
+        with:
+          report_paths: "reports/junit-perf.xml"
+          check_name: Performance smoke
+          fail_on_failure: true
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-smoke-report
+          path: reports/
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::error::Performance smoke failed on ${{ github.event.inputs.environment || 'SourceFuse — Staging' }} — investigate immediately"

@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/accounts/{{accountId}}/ledger"
+  method: POST
+response:
+  statusCode: 422
+  statusText: OK
+  body:
+    type: raw
+    content: |-
+      {
+        "error": {
+          "code": "validation_error",
+          "fields": [
+            {
+              "field": "amount",
+              "rule": "positive"
+            }
+          ]
+        }
+      }
+    options:
+      raw:
+        language: json
+order: 1000

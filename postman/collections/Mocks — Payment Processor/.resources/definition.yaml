@@ -1,0 +1,7 @@
+$kind: collection
+description: |-
+  # 💳 Payment Processor Mock
+
+  Simulated 3rd-party payment processor (Stripe-shaped). Use to isolate the platform from the live payments provider during development and dependency outages.
+variables:
+  baseUrl: "{{paymentProcessorUrl}}"

@@ -1,0 +1,18 @@
+$kind: collection
+description: |-
+  # 🤖 AI Generated Workflows
+
+  These collections were **generated and continuously maintained by Postbot / Postman AI**.
+  They demonstrate how AI reduces manual scripting and maintenance effort across:
+
+  - Regression test generation from OpenAPI specs
+  - Assertion generation (business, schema, role-based, nested)
+  - Mock scenario generation
+
+  Every test below was suggested by AI; humans reviewed and accepted.
+
+  ## AI Generated Mock Scenarios
+
+  Postbot generated these mock scenarios from the OpenAPI spec, including failure modes that aren't represented in the schema but were inferred from operation semantics.
+variables:
+  baseUrl: "{{baseUrl}}"

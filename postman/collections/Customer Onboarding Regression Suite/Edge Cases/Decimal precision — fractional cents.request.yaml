@@ -1,0 +1,26 @@
+$kind: http-request
+description: Service must reject sub-cent precision rather than silently rounding.
+url: "{{baseUrl}}/payments"
+method: POST
+headers:
+  Authorization: "Bearer {{serviceToken}}"
+  Content-Type: application/json
+  X-Tenant-Id: "{{tenantId}}"
+body:
+  type: raw
+  content: |-
+    {
+      "type": "ach_pull",
+      "amount": "10.123",
+      "currency": "USD",
+      "destinationAccountId": "{{accountId}}"
+    }
+  options:
+    raw:
+      language: json
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Rejects sub-cent precision', function () { pm.expect(pm.response.code).to.eql(422); });
+    language: text/javascript
+order: 1100

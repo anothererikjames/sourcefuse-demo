@@ -1,0 +1,26 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/customers/{{externalId}}"
+  method: GET
+response:
+  statusCode: 206
+  statusText: OK
+  headers:
+    - key: X-Partial-Reason
+      value: mainframe-cics-region-degraded
+  body:
+    type: raw
+    content: |-
+      {
+        "externalId": "ext_1722988800000",
+        "firstName": "Alex",
+        "_partial": true,
+        "_missing": [
+          "address",
+          "legacyAccountNumber"
+        ]
+      }
+    options:
+      raw:
+        language: json
+order: 1000

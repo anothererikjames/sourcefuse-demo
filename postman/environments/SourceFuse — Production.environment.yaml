@@ -1,0 +1,34 @@
+name: SourceFuse — Production
+color: "#a92020"
+values:
+  - key: baseUrl
+    value: "https://api.sourcefuse-demo.example.com/v1"
+    enabled: true
+  - key: coreBankingUrl
+    value: "https://core-banking.sourcefuse-demo.example.com"
+    enabled: true
+  - key: paymentProcessorUrl
+    value: "https://payments.sourcefuse-demo.example.com"
+    enabled: true
+  - key: notificationsUrl
+    value: "https://notifications.sourcefuse-demo.example.com"
+    enabled: true
+  - key: legacyCustomerUrl
+    value: "https://legacy.sourcefuse-demo.example.com"
+    enabled: true
+  - key: authToken
+    value: "{{vault:sourcefuse_prod_token}}"
+    enabled: true
+    type: secret
+  - key: tenantId
+    value: tnt_prod_001
+    enabled: true
+  - key: kycProvider
+    value: jumio
+    enabled: true
+  - key: p95BudgetMs
+    value: "600"
+    enabled: true
+  - key: featureFlag.aiAssertions
+    value: "false"
+    enabled: true

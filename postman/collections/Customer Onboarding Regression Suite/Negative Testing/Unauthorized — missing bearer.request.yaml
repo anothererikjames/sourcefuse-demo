@@ -1,0 +1,15 @@
+$kind: http-request
+description: No bearer token → 401.
+url: "{{baseUrl}}/customers"
+method: GET
+headers:
+  X-Tenant-Id: "{{tenantId}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('401 Unauthorized', function () { pm.expect(pm.response.code).to.eql(401); });
+      pm.test('WWW-Authenticate header present', function () {
+          pm.expect(pm.response.headers.get('WWW-Authenticate') || '').to.include('Bearer');
+      });
+    language: text/javascript
+order: 1300

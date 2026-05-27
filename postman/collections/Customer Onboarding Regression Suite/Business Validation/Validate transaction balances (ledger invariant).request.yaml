@@ -1,0 +1,43 @@
+$kind: http-request
+description: "Validates ledger invariant: sum of debits equals sum of credits for the account."
+url: "{{baseUrl}}/accounts/{{accountId}}/ledger"
+method: GET
+headers:
+  Authorization: "Bearer {{serviceToken}}"
+  X-Tenant-Id: "{{tenantId}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is success (2xx)', function () {
+          pm.expect(pm.response.code).to.be.within(200, 299);
+      });
+    
+      pm.test('Response time below SLO budget (p95)', function () {
+          pm.expect(pm.response.responseTime, 'p95 budget 600ms').to.be.below(600);
+      });
+    
+      pm.test('Content-Type is application/json', function () {
+          if (pm.response.code !== 204) {
+              pm.expect(pm.response.headers.get('Content-Type') || '').to.include('application/json');
+          }
+      });
+    
+      pm.test('Response is valid JSON', function () {
+          if (pm.response.code !== 204) pm.response.to.be.json;
+      });
+    
+      pm.test('Correlation ID header present', function () {
+          pm.expect(pm.response.headers.get('X-Correlation-Id'), 'X-Correlation-Id header').to.be.a('string');
+      });
+    
+      const body = pm.response.json();
+      const debits = body.entries.filter((e) => e.direction === 'debit').reduce((s,e) => s + Number(e.amount), 0);
+      const credits = body.entries.filter((e) => e.direction === 'credit').reduce((s,e) => s + Number(e.amount), 0);
+      pm.test('Ledger balances', function () {
+          pm.expect(credits.toFixed(2)).to.eql(debits.toFixed(2));
+      });
+      pm.test('Closing balance matches running total', function () {
+          pm.expect(Number(body.closingBalance)).to.eql(credits - debits + Number(body.openingBalance));
+      });
+    language: text/javascript
+order: 1200

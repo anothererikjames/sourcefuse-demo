@@ -1,0 +1,24 @@
+$kind: collection
+description: |-
+  # 🤖 AI Generated Workflows
+
+  These collections were **generated and continuously maintained by Postbot / Postman AI**.
+  They demonstrate how AI reduces manual scripting and maintenance effort across:
+
+  - Regression test generation from OpenAPI specs
+  - Assertion generation (business, schema, role-based, nested)
+  - Mock scenario generation
+
+  Every test below was suggested by AI; humans reviewed and accepted.
+
+  ## AI Generated Regression Suite
+
+  Generated from `openapi.yaml` v1.2 → v1.3. When the schema added `consent.marketing`, Postbot evolved 14 existing tests and added 3 new ones automatically.
+variables:
+  baseUrl: "{{baseUrl}}"
+auth:
+  - id: "22222222-2222-4222-8222-222222222222"
+    type: bearer
+    name: Bearer
+    credentials:
+      token: "{{authToken}}"

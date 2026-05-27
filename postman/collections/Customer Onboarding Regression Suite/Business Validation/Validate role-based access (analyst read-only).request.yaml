@@ -1,0 +1,25 @@
+$kind: http-request
+description: Analyst role MUST NOT be able to delete customers. Demonstrates RBAC assertion.
+url: "{{baseUrl}}/customers/{{customerId}}"
+method: DELETE
+headers:
+  Authorization: "Bearer {{analystToken}}"
+  X-Tenant-Id: "{{tenantId}}"
+scripts:
+  - type: preRequest
+    code: |-
+      // In real env, analystToken is issued with role=analyst (read-only)
+      pm.collectionVariables.set('analystToken', 'eyJhbGciOiJSUzI1NiIsInJvbGUiOiJhbmFseXN0In0.demo.sig');
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      pm.test('Analyst is forbidden from destructive op', function () {
+          pm.expect(pm.response.code).to.eql(403);
+      });
+      pm.test('Error body has machine-readable code', function () {
+          const body = pm.response.json();
+          pm.expect(body.error.code).to.eql('rbac.forbidden');
+          pm.expect(body.error.requiredRole).to.eql('admin');
+      });
+    language: text/javascript
+order: 1100

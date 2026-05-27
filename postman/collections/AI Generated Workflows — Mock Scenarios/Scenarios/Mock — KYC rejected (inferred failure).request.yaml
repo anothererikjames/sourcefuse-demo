@@ -1,0 +1,16 @@
+$kind: http-request
+description: "AI inferred this failure case from the `state` enum and added a realistic body."
+url: "{{baseUrl}}/customers/{{customerId}}/kyc"
+method: POST
+body:
+  type: raw
+  content: |-
+    {
+      "documentType": "passport",
+      "documentCountry": "US"
+    }
+  options:
+    raw:
+      language: json
+order: 1100
+examples: ./.resources/Mock — KYC rejected (inferred failure).resources/examples

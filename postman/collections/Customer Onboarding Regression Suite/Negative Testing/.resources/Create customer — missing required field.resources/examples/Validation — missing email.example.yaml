@@ -1,0 +1,27 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/customers"
+  method: POST
+response:
+  statusCode: 422
+  statusText: OK
+  body:
+    type: raw
+    content: |-
+      {
+        "error": {
+          "code": "validation_error",
+          "message": "Request failed validation",
+          "fields": [
+            {
+              "field": "email",
+              "rule": "required",
+              "message": "email is required"
+            }
+          ]
+        }
+      }
+    options:
+      raw:
+        language: json
+order: 1000

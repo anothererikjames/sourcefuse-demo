@@ -1,0 +1,8 @@
+$kind: http-request
+description: Retrieves customer from legacy COBOL-backed platform via REST shim.
+url: "{{baseUrl}}/customers/{{externalId}}"
+method: GET
+headers:
+  X-Legacy-API-Key: "{{authToken}}"
+order: 1000
+examples: ./.resources/Get legacy customer.resources/examples

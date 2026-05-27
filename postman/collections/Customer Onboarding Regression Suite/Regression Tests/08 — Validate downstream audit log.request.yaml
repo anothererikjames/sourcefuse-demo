@@ -1,0 +1,47 @@
+$kind: http-request
+description: Confirms the onboarding workflow emitted the expected audit events.
+url: "{{baseUrl}}/audit?correlationId={{correlationId}}"
+method: GET
+headers:
+  Authorization: "Bearer {{serviceToken}}"
+  X-Tenant-Id: "{{tenantId}}"
+  X-Correlation-Id: "{{correlationId}}"
+queryParams:
+  - key: correlationId
+    value: "{{correlationId}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is success (2xx)', function () {
+          pm.expect(pm.response.code).to.be.within(200, 299);
+      });
+    
+      pm.test('Response time below SLO budget (p95)', function () {
+          pm.expect(pm.response.responseTime, 'p95 budget 600ms').to.be.below(600);
+      });
+    
+      pm.test('Content-Type is application/json', function () {
+          if (pm.response.code !== 204) {
+              pm.expect(pm.response.headers.get('Content-Type') || '').to.include('application/json');
+          }
+      });
+    
+      pm.test('Response is valid JSON', function () {
+          if (pm.response.code !== 204) pm.response.to.be.json;
+      });
+    
+      pm.test('Correlation ID header present', function () {
+          pm.expect(pm.response.headers.get('X-Correlation-Id'), 'X-Correlation-Id header').to.be.a('string');
+      });
+    
+      const body = pm.response.json();
+      pm.test('All onboarding events emitted', function () {
+          const kinds = body.data.map((e) => e.kind);
+          ['customer.created','kyc.completed','account.opened','payment.settled','notification.sent']
+              .forEach((k) => pm.expect(kinds, k).to.include(k));
+      });
+      pm.test('Events share correlation id', function () {
+          body.data.forEach((e) => pm.expect(e.correlationId).to.eql(pm.variables.get('correlationId')));
+      });
+    language: text/javascript
+order: 1700

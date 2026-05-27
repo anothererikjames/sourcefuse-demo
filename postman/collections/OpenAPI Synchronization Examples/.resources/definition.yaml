@@ -1,0 +1,14 @@
+$kind: collection
+description: |-
+  # 🔗 OpenAPI Synchronization Examples
+
+  Demonstrates how source-controlled APIs flow into Postman:
+
+  1. **Schema change** — `openapi.yaml` adds `consent.marketing` field
+  2. **Collection update** — Postbot regenerates the request body with the new field
+  3. **Assertion update** — existing tests evolve to include the new required field
+  4. **Reusable governance** — same lint/contract rules apply across every API
+
+  **Outcome:** reduced manual maintenance; standardized API quality at scale.
+variables:
+  baseUrl: "{{baseUrl}}"

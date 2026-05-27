@@ -1,0 +1,16 @@
+$kind: collection
+description: |-
+  # ⚡ Performance Smoke Validation
+
+  Lightweight latency + payload validation, executed against the deployed environment
+  immediately after deploy. **Not a load test, not a K6 replacement** — this is the
+  shift-left signal that something is degrading before perf tests run.
+
+  **What it catches:**
+  - p95 latency creep
+  - Payload size growth
+  - Header / cache regression
+  - SLO breach on critical endpoints
+variables:
+  baseUrl: "{{baseUrl}}"
+  p95BudgetMs: "{{p95BudgetMs}}"

@@ -1,0 +1,35 @@
+$kind: http-request
+description: Replays the same Idempotency-Key. Service must return the same payment without double-charging.
+url: "{{baseUrl}}/payments"
+method: POST
+headers:
+  Authorization: "Bearer {{serviceToken}}"
+  Content-Type: application/json
+  X-Tenant-Id: "{{tenantId}}"
+  Idempotency-Key: fixed-key-001
+body:
+  type: raw
+  content: |-
+    {
+      "type": "ach_pull",
+      "amount": "10.00",
+      "currency": "USD",
+      "destinationAccountId": "{{accountId}}"
+    }
+  options:
+    raw:
+      language: json
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Same payment id on replay', function () {
+          const body = pm.response.json();
+          const prior = pm.collectionVariables.get('idemPaymentId');
+          if (prior) {
+              pm.expect(body.id).to.eql(prior);
+          } else {
+              pm.collectionVariables.set('idemPaymentId', body.id);
+          }
+      });
+    language: text/javascript
+order: 1000

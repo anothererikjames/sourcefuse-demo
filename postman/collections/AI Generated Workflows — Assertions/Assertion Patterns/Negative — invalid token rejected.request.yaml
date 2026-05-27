@@ -1,0 +1,17 @@
+$kind: http-request
+description: "**AI-generated** assertion pattern: Negative — invalid token rejected."
+url: "{{baseUrl}}/customers"
+method: GET
+headers:
+  Authorization: "Bearer {{authToken}}"
+  Accept: application/json
+scripts:
+  - type: afterResponse
+    code: |-
+    
+      pm.test('401 with invalid token', function () { pm.expect(pm.response.code).to.eql(401); });
+      pm.test('Error code is auth.invalid_token', function () {
+          pm.expect(pm.response.json().error.code).to.eql('auth.invalid_token');
+      });
+    language: text/javascript
+order: 1250

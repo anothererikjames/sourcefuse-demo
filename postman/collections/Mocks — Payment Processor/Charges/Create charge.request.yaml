@@ -1,0 +1,21 @@
+$kind: http-request
+description: Authorizes and captures a charge against a customer source.
+url: "{{baseUrl}}/v1/charges"
+method: POST
+headers:
+  Authorization: "Bearer {{authToken}}"
+  Content-Type: application/json
+body:
+  type: raw
+  content: |-
+    {
+      "amount": 25000,
+      "currency": "usd",
+      "source": "src_demo_visa",
+      "description": "Initial funding"
+    }
+  options:
+    raw:
+      language: json
+order: 1000
+examples: ./.resources/Create charge.resources/examples

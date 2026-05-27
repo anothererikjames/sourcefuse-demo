@@ -1,0 +1,27 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/customers/{{customerId}}/accounts"
+  method: POST
+response:
+  statusCode: 201
+  statusText: OK
+  body:
+    type: raw
+    content: |-
+      {
+        "id": "acc_4f3b1e22",
+        "customerId": "c2c8c0f6-7d6d-4ad9-9c1a-9b6a3a3f1b22",
+        "accountNumber": "100020003001",
+        "routingNumber": "121000358",
+        "type": "checking",
+        "status": "open",
+        "balance": {
+          "amount": "0.00",
+          "currency": "USD"
+        },
+        "openedAt": "2026-05-27T17:14:13Z"
+      }
+    options:
+      raw:
+        language: json
+order: 1000

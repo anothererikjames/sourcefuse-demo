@@ -1,0 +1,20 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/notifications"
+  method: POST
+response:
+  statusCode: 400
+  statusText: OK
+  body:
+    type: raw
+    content: |-
+      {
+        "error": {
+          "code": "template_not_found",
+          "template": "onboarding.welcome.v3"
+        }
+      }
+    options:
+      raw:
+        language: json
+order: 1000

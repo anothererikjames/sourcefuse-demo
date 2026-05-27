@@ -1,0 +1,18 @@
+$kind: collection
+description: |-
+  # 🔁 CI Regression Pipeline
+
+  Lightweight collection executed on every PR via GitHub Actions
+  (`.github/workflows/ci-regression.yml`).
+
+  **Purpose:** early API quality visibility inside CI/CD — not a replacement for K6,
+  but a shift-left gate that catches breaking contracts and latency regressions before
+  they reach perf testing.
+
+  **Quality gates:**
+  - 100% of contract assertions pass
+  - p95 response time < `{{p95BudgetMs}}` ms
+  - Zero schema drift versus the OpenAPI source of truth
+variables:
+  baseUrl: "{{baseUrl}}"
+  p95BudgetMs: "{{p95BudgetMs}}"
