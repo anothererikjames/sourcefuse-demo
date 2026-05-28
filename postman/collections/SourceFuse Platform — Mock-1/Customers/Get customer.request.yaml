@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/customers/:customerId"
+method: GET
+headers:
+  Authorization: Bearer {{authToken}}
+pathVariables:
+  customerId: ""
+examples: ./.resources/Get customer.resources/examples
+order: 3000

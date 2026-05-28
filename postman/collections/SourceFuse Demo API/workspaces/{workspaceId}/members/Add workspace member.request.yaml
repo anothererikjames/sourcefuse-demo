@@ -1,0 +1,58 @@
+$kind: http-request
+url: "{{baseUrl}}/workspaces/:workspaceId/members"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: workspaceId
+    value: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: json
+  content: |-
+    {
+      "email": "llOfOoHu@WWBMBQxPGsSqJTWf.etph",
+      "role": "admin",
+      "name": "string"
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "owner",
+            "admin",
+            "member",
+            "guest"
+          ]
+        }
+      },
+      "required": [
+        "email",
+        "role"
+      ]
+    }
+examples: ./.resources/Add workspace member.resources/examples
+order: 2000

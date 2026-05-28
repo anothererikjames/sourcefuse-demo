@@ -1,5 +1,5 @@
 $kind: http-request
-description: "Fetches live OpenAPI doc and asserts the schema hash matches the spec in the repo. If they drift, CI fails."
+description: Fetches live OpenAPI doc and asserts the schema hash matches the spec in the repo. If they drift, CI fails.
 url: "{{baseUrl}}/openapi.json"
 method: GET
 scripts:
@@ -11,4 +11,4 @@ scripts:
           if (expected) pm.expect(body['x-spec-hash']).to.eql(expected);
       });
     language: text/javascript
-order: 1200
+order: 3000

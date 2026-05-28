@@ -1,0 +1,19 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/charges"
+  method: POST
+response:
+  statusCode: 503
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": {
+          "type": "api_error",
+          "message": "Payment provider is unavailable"
+        }
+      }
+order: 3000

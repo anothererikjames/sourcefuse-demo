@@ -1,0 +1,22 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/accounts/:accountId/ledger"
+  method: POST
+  pathVariables:
+    accountId: ""
+response:
+  statusCode: 201
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "led_001",
+        "balanceAfter": {
+          "amount": "1350.42",
+          "currency": "USD"
+        }
+      }
+order: 1000

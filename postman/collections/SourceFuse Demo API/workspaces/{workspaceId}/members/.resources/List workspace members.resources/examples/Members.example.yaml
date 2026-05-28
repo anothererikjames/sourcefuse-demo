@@ -1,0 +1,74 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/workspaces/:workspaceId/members"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    workspaceId: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": "98467e0a-ce57-703d-8d1a-539682303460",
+          "email": "ynNwu2RdvW@XEQhW.kw",
+          "role": "admin",
+          "name": "string",
+          "joinedAt": "1977-05-15T22:30:42.661Z"
+        },
+        {
+          "id": "54f9bc1c-a7cb-d35c-a252-aeae01e7b14f",
+          "email": "1xvIRVOP@BfNXgbugIkLTJiqhD.cs",
+          "role": "member",
+          "name": "string",
+          "joinedAt": "1980-02-17T02:43:15.633Z"
+        }
+      ]
+    $type: |-
+      {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            },
+            "name": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string",
+              "enum": [
+                "owner",
+                "admin",
+                "member",
+                "guest"
+              ]
+            },
+            "joinedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "required": [
+            "id",
+            "email",
+            "role"
+          ]
+        }
+      }
+order: 1000

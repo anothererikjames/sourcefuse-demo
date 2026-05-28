@@ -1,0 +1,42 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/customers"
+  method: POST
+  body:
+    type: json
+    content: |-
+      {
+        "email": "demo@sourcefuse.example.com",
+        "firstName": "Alex",
+        "lastName": "Diaz"
+      }
+response:
+  statusCode: 201
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    Location: /customers/c2c8c0f6-7d6d-4ad9-9c1a-9b6a3a3f1b22
+    X-Correlation-Id: cor_demo
+  body:
+    type: json
+    content: |-
+      {
+        "id": "c2c8c0f6-7d6d-4ad9-9c1a-9b6a3a3f1b22",
+        "tenantId": "tnt_qa_001",
+        "externalId": "ext_demo",
+        "email": "demo@sourcefuse.example.com",
+        "firstName": "Alex",
+        "lastName": "Diaz",
+        "dateOfBirth": "1988-04-12",
+        "phone": "+1-415-555-0188",
+        "status": "pending_kyc",
+        "address": {
+          "line1": "1 Mission Street",
+          "city": "San Francisco",
+          "state": "CA",
+          "postalCode": "94105",
+          "country": "US"
+        },
+        "createdAt": "2026-05-27T17:14:08Z"
+      }
+order: 1000

@@ -1,0 +1,43 @@
+$kind: http-request
+url: "{{baseUrl}}/workspaces/:workspaceId"
+method: PATCH
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: workspaceId
+    value: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: json
+  content: |-
+    {
+      "name": "string",
+      "description": "string"
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+examples: ./.resources/Update workspace.resources/examples
+order: 2000

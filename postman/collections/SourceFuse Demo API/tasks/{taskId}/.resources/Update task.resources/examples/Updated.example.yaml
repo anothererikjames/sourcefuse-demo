@@ -1,0 +1,101 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/tasks/:taskId"
+  method: PATCH
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    taskId: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+  body:
+    type: json
+    content: |-
+      {
+        "title": "string",
+        "description": "string",
+        "status": "done",
+        "priority": "medium",
+        "assignee": "string",
+        "dueDate": "1970-11-20"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "fa3e3fc1-a45e-5226-c718-17c3ffad69b4",
+        "projectId": "8027b6f5-9e3c-4601-0736-bc252b619ce9",
+        "title": "string",
+        "status": "done",
+        "description": "string",
+        "priority": "urgent",
+        "assignee": "string",
+        "dueDate": "2006-03-05",
+        "createdAt": "1970-11-07T15:12:53.975Z",
+        "updatedAt": "2001-12-03T11:15:08.190Z"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "todo",
+              "in_progress",
+              "blocked",
+              "done"
+            ]
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "urgent"
+            ]
+          },
+          "assignee": {
+            "type": "string",
+            "description": "Member id or email"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "projectId",
+          "title",
+          "status"
+        ]
+      }
+order: 1000

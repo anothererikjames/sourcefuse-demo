@@ -1,8 +1,10 @@
 workspace:
   id: f6ab418b-b4d3-47a3-905c-71601d964f6d
+
 localResources:
   specs:
     - ../openapi.yaml
+    - ../postman/specs/CI Regression/CI Regression.yaml
   collections:
     - ../postman/collections/SourceFuse Platform — Mock
     - ../postman/collections/Notification Service — Mock
@@ -19,6 +21,14 @@ localResources:
     - ../postman/collections/Mocks — Payment Processor
     - ../postman/collections/OpenAPI Synchronization Examples
     - ../postman/collections/Performance Smoke Validation
+    - ../postman/collections/Payment Processor — Mock-1
+    - ../postman/collections/Legacy Customer Platform — Mock-1
+    - ../postman/collections/Notification Service — Mock-1
+    - ../postman/collections/SourceFuse Platform — Mock-1
+    - ../postman/collections/Core Banking — Mock-1
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+
 cloudResources:
   collections:
     ../postman/collections/SourceFuse Platform — Mock: 52238111-030e8873-178d-42bf-bfae-2430a1840bec
@@ -36,5 +46,10 @@ cloudResources:
     ../postman/collections/Mocks — Payment Processor: 52238111-c1c383dc-9e07-46c7-ad67-f14a1396ee12
     ../postman/collections/OpenAPI Synchronization Examples: 52238111-c3d31213-3265-4a3c-9161-054a9ccb0c39
     ../postman/collections/Performance Smoke Validation: 52238111-280f6ccd-33ef-4a7e-9a98-faae9834f592
+    ../postman/collections/Payment Processor — Mock-1: 52238111-1bc99e28-c074-43c8-b94e-c82793a20aa0
+    ../postman/collections/Legacy Customer Platform — Mock-1: 52238111-4fba9aea-218d-42f6-a05e-7b620686abd8
+    ../postman/collections/Notification Service — Mock-1: 52238111-c41e43fc-a692-4dd8-8de7-3cc7203aee71
+    ../postman/collections/SourceFuse Platform — Mock-1: 52238111-cc767b89-7837-49f7-aec0-7ba0b5ab46b4
+    ../postman/collections/Core Banking — Mock-1: 52238111-d96d316a-d288-4c80-aab6-8e3ce758c29d
   specs:
     ../openapi.yaml: 3bbde03b-d4e8-4531-9db8-0c9f7237301b

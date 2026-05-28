@@ -1,0 +1,47 @@
+$kind: http-request
+url: "{{baseUrl}}/tasks/:taskId/comments"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: taskId
+    value: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: json
+  content: |-
+    {
+      "author": "string",
+      "body": "string"
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "author",
+        "body"
+      ]
+    }
+examples: ./.resources/Add comment to a task.resources/examples
+order: 2000

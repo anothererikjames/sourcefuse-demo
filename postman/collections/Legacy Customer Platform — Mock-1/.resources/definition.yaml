@@ -1,0 +1,3 @@
+$kind: collection
+name: Legacy Customer Platform — Mock
+description: Legacy COBOL-backed platform via REST shim, with flaky behaviors.

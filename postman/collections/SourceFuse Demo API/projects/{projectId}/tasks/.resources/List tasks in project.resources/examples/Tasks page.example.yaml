@@ -1,0 +1,125 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/projects/:projectId/tasks?status=todo&assignee=string&limit=25&cursor=string"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    status: todo
+    assignee: string
+    limit: "25"
+    cursor: string
+  pathVariables:
+    projectId: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "id": "83a2ac6d-ee4e-b25c-91c5-8a3206a6c5a7",
+            "projectId": "97dbd816-0395-0718-7b50-69bad11adc27",
+            "title": "string",
+            "status": "blocked",
+            "description": "string",
+            "priority": "urgent",
+            "assignee": "string",
+            "dueDate": "2006-10-08",
+            "createdAt": "2024-09-13T19:44:09.731Z",
+            "updatedAt": "1958-07-06T16:31:51.447Z"
+          },
+          {
+            "id": "5ae552dc-1d15-aab9-fb33-c5b1edf9af8b",
+            "projectId": "4af127aa-568a-dd4f-b791-70e7fe5e09e3",
+            "title": "string",
+            "status": "in_progress",
+            "description": "string",
+            "priority": "high",
+            "assignee": "string",
+            "dueDate": "1995-02-06",
+            "createdAt": "1999-01-08T10:35:42.730Z",
+            "updatedAt": "2018-02-07T13:23:21.878Z"
+          }
+        ],
+        "nextCursor": "string"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "projectId": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "todo",
+                    "in_progress",
+                    "blocked",
+                    "done"
+                  ]
+                },
+                "priority": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high",
+                    "urgent"
+                  ]
+                },
+                "assignee": {
+                  "type": "string",
+                  "description": "Member id or email"
+                },
+                "dueDate": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "id",
+                "projectId",
+                "title",
+                "status"
+              ]
+            }
+          },
+          "nextCursor": {
+            "type": "string"
+          }
+        }
+      }
+order: 1000

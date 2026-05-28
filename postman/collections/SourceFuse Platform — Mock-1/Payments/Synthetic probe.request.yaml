@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{baseUrl}}/payments/_synthetic"
+method: POST
+headers:
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "type": "synthetic_probe"
+    }
+examples: ./.resources/Synthetic probe.resources/examples
+order: 2000

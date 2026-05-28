@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/accounts/:accountId/ledger"
+method: POST
+headers:
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+pathVariables:
+  accountId: ""
+body:
+  type: json
+  content: |-
+    {
+      "direction": "credit",
+      "amount": "100.00",
+      "currency": "USD"
+    }
+examples: ./.resources/Post ledger entry.resources/examples
+order: 2000

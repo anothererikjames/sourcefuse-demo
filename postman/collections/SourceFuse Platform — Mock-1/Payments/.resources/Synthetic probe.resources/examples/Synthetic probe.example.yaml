@@ -1,0 +1,18 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/payments/_synthetic"
+  method: POST
+response:
+  statusCode: 201
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "pmt_synthetic",
+        "status": "settled",
+        "probeLatencyMs": 412
+      }
+order: 1000

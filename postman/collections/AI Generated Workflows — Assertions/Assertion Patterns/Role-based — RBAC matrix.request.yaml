@@ -3,16 +3,16 @@ description: "**AI-generated** assertion pattern: Role-based — RBAC matrix."
 url: "{{baseUrl}}/customers/{{customerId}}"
 method: DELETE
 headers:
-  Authorization: "Bearer {{authToken}}"
+  Authorization: Bearer {{authToken}}
   Accept: application/json
 scripts:
   - type: afterResponse
     code: |-
-    
+      
       const role = pm.environment.get('actorRole') || 'analyst';
       pm.test('RBAC enforced for ' + role, function () {
           if (role === 'admin') pm.expect(pm.response.code).to.be.oneOf([200,202,204]);
           else pm.expect(pm.response.code).to.eql(403);
       });
     language: text/javascript
-order: 1300
+order: 7000

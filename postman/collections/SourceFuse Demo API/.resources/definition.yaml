@@ -1,0 +1,11 @@
+$kind: collection
+description: |-
+  Project & task management API for the SourceFuse Postman demo.
+  Generic SaaS-style domain: workspaces, projects, tasks, comments.
+
+
+  Contact Support:
+   Name: SourceFuse Demo Team
+   Email: demo@sourcefuse.example.com
+variables:
+  baseUrl: https://api.sourcefuse-demo.example.com/v1

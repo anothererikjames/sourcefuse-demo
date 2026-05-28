@@ -5,4 +5,3 @@ method: GET
 headers:
   X-Legacy-API-Key: "{{authToken}}"
 order: 1000
-examples: ./.resources/Get legacy customer.resources/examples

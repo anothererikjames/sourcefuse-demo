@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/accounts/:accountId"
+  method: GET
+  pathVariables:
+    accountId: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "acc_4f3b1e22",
+        "type": "checking",
+        "status": "open",
+        "balance": {
+          "amount": "1250.42",
+          "currency": "USD"
+        },
+        "openedAt": "2025-12-01T08:30:00Z"
+      }
+order: 1000

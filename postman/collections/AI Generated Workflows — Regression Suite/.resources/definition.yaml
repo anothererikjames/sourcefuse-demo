@@ -17,8 +17,8 @@ description: |-
 variables:
   baseUrl: "{{baseUrl}}"
 auth:
-  - id: "22222222-2222-4222-8222-222222222222"
+  - id: 30535120-c843-456b-9037-83aa4f79f370
     type: bearer
-    name: Bearer
+    name: bearer auth
     credentials:
       token: "{{authToken}}"

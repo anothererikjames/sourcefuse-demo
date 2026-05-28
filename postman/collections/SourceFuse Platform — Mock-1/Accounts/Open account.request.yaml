@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{baseUrl}}/customers/:customerId/accounts"
+method: POST
+headers:
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+pathVariables:
+  customerId: ""
+body:
+  type: json
+  content: |-
+    {
+      "type": "checking",
+      "currency": "USD"
+    }
+examples: ./.resources/Open account.resources/examples
+order: 1000

@@ -1,0 +1,106 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/workspaces/:workspaceId/projects?status=archived&limit=25&cursor=string"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    status: archived
+    limit: "25"
+    cursor: string
+  pathVariables:
+    workspaceId: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "id": "ab7c57f9-3e90-4422-37e3-dde6c6d0fb79",
+            "workspaceId": "dcb9cae2-c30a-ea02-2178-6f291913505a",
+            "name": "string",
+            "key": "string",
+            "status": "active",
+            "description": "string",
+            "createdAt": "1957-03-27T09:37:47.634Z",
+            "updatedAt": "1981-01-03T05:43:45.228Z"
+          },
+          {
+            "id": "c936e26a-3115-ac0b-37c9-75fd2e165d65",
+            "workspaceId": "9716b469-a969-c41b-6c6b-30f9011305ee",
+            "name": "string",
+            "key": "string",
+            "status": "active",
+            "description": "string",
+            "createdAt": "2007-11-13T03:52:09.113Z",
+            "updatedAt": "2008-11-07T17:54:24.234Z"
+          }
+        ],
+        "nextCursor": "string"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "workspaceId": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "key": {
+                  "type": "string",
+                  "description": "Short project key like ENG or MKT"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "active",
+                    "archived"
+                  ]
+                },
+                "description": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "id",
+                "workspaceId",
+                "name",
+                "key",
+                "status"
+              ]
+            }
+          },
+          "nextCursor": {
+            "type": "string"
+          }
+        }
+      }
+order: 1000

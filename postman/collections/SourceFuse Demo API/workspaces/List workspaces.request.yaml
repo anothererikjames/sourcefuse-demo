@@ -1,0 +1,27 @@
+$kind: http-request
+url: "{{baseUrl}}/workspaces?limit=25&cursor=string"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: limit
+    value: "25"
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "default": 25,
+            "maximum": 100
+          }
+        }
+      }
+  - key: cursor
+    value: string
+    $type: string
+body:
+  type: text
+  content: ""
+examples: ./.resources/List workspaces.resources/examples
+order: 1000

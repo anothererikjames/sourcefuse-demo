@@ -1,0 +1,19 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/payments"
+  method: POST
+response:
+  statusCode: 402
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": {
+          "code": "insufficient_funds",
+          "message": "Source account has insufficient balance"
+        }
+      }
+order: 2000

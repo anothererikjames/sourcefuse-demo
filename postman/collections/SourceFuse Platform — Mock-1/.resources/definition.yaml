@@ -1,0 +1,3 @@
+$kind: collection
+name: SourceFuse Platform — Mock
+description: Cloud mock of the SourceFuse platform — covers every endpoint used by the Customer Onboarding Regression Suite. Bound to a Postman mock server; the returned URL is wired into the 'SourceFuse — Mock' environment as baseUrl.

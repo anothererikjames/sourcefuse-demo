@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/payments"
+method: POST
+headers:
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "type": "ach_pull",
+      "amount": "250.00",
+      "currency": "USD"
+    }
+examples: ./.resources/Execute payment.resources/examples
+order: 1000

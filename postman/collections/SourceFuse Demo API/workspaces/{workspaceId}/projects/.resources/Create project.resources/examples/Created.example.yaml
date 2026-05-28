@@ -1,0 +1,82 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/workspaces/:workspaceId/projects"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    workspaceId: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+  body:
+    type: json
+    content: |-
+      {
+        "name": "string",
+        "key": "string",
+        "description": "string"
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "0f0989eb-9991-8730-e2dd-04262acb8737",
+        "workspaceId": "20280aac-0022-85e1-fb29-07602bb94249",
+        "name": "string",
+        "key": "string",
+        "status": "active",
+        "description": "string",
+        "createdAt": "2009-07-27T09:44:04.949Z",
+        "updatedAt": "1966-11-20T04:15:41.663Z"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "workspaceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string",
+            "description": "Short project key like ENG or MKT"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "archived"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "workspaceId",
+          "name",
+          "key",
+          "status"
+        ]
+      }
+order: 1000

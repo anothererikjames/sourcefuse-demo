@@ -3,6 +3,5 @@ description: Core banking account read.
 url: "{{baseUrl}}/v2/accounts/{{accountId}}"
 method: GET
 headers:
-  Authorization: "Bearer {{authToken}}"
+  Authorization: Bearer {{authToken}}
 order: 1000
-examples: ./.resources/Get account.resources/examples

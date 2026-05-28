@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/v1/notifications"
+method: POST
+headers:
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "channel": "email",
+      "template": "onboarding.welcome.v3"
+    }
+examples: ./.resources/Send notification.resources/examples
+order: 1000

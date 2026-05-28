@@ -1,0 +1,68 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/workspaces/:workspaceId/members"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    workspaceId: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+  body:
+    type: json
+    content: |-
+      {
+        "email": "llOfOoHu@WWBMBQxPGsSqJTWf.etph",
+        "role": "admin",
+        "name": "string"
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "75a9665a-4fbe-ea47-6233-574640202f32",
+        "email": "JXja3@KtgnrJevkBohLxmCM.wy",
+        "role": "member",
+        "name": "string",
+        "joinedAt": "2020-06-10T03:43:41.904Z"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "owner",
+              "admin",
+              "member",
+              "guest"
+            ]
+          },
+          "joinedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "role"
+        ]
+      }
+order: 1000

@@ -1,0 +1,62 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/tasks/:taskId/comments"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    taskId: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+  body:
+    type: json
+    content: |-
+      {
+        "author": "string",
+        "body": "string"
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "3558875b-45cb-d577-e1f9-45ef5880ac27",
+        "taskId": "781ef2f5-1515-2c0d-d046-db3f9b7d1b6b",
+        "author": "string",
+        "body": "string",
+        "createdAt": "1948-08-25T09:47:15.287Z"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "taskId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "author": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "taskId",
+          "author",
+          "body"
+        ]
+      }
+order: 1000

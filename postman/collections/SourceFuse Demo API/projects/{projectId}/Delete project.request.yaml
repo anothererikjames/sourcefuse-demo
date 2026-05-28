@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{baseUrl}}/projects/:projectId"
+method: DELETE
+pathVariables:
+  - key: projectId
+    value: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: text
+  content: ""
+examples: ./.resources/Delete project.resources/examples
+order: 3000

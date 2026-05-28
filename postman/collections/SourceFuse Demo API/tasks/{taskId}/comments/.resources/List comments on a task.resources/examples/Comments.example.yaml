@@ -1,0 +1,69 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/tasks/:taskId/comments"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    taskId: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": "2037eb58-11d4-2577-9332-be1267a4ee5e",
+          "taskId": "b60bc50d-5442-a199-b6f6-eca83cd967ae",
+          "author": "string",
+          "body": "string",
+          "createdAt": "1994-10-17T10:44:56.078Z"
+        },
+        {
+          "id": "d2943e3f-f219-7926-d6c5-a8ee424c7d42",
+          "taskId": "a3613431-ebec-d566-fddc-b4ebca7c41e3",
+          "author": "string",
+          "body": "string",
+          "createdAt": "1988-05-07T22:09:01.588Z"
+        }
+      ]
+    $type: |-
+      {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "taskId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "author": {
+              "type": "string"
+            },
+            "body": {
+              "type": "string"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "required": [
+            "id",
+            "taskId",
+            "author",
+            "body"
+          ]
+        }
+      }
+order: 1000

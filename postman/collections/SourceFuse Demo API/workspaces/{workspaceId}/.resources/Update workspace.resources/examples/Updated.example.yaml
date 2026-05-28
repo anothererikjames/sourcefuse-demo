@@ -1,0 +1,65 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/workspaces/:workspaceId"
+  method: PATCH
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    workspaceId: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+  body:
+    type: json
+    content: |-
+      {
+        "name": "string",
+        "description": "string"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "10ceba00-654e-c12e-aa11-8282acb13ffc",
+        "name": "string",
+        "slug": "string",
+        "description": "string",
+        "createdAt": "1998-07-25T08:23:12.836Z",
+        "updatedAt": "1994-11-04T09:45:00.514Z"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "slug"
+        ]
+      }
+order: 1000

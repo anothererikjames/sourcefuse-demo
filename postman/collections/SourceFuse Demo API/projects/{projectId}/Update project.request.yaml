@@ -1,0 +1,51 @@
+$kind: http-request
+url: "{{baseUrl}}/projects/:projectId"
+method: PATCH
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: projectId
+    value: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: json
+  content: |-
+    {
+      "name": "string",
+      "description": "string",
+      "status": "archived"
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "archived"
+          ]
+        }
+      }
+    }
+examples: ./.resources/Update project.resources/examples
+order: 2000

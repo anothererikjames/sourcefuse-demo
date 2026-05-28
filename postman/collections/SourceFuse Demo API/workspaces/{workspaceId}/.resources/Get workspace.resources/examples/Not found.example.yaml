@@ -1,0 +1,16 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/workspaces/:workspaceId"
+  method: GET
+  pathVariables:
+    workspaceId: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 404
+  statusText: Not Found
+  body:
+    type: text
+    content: ""
+order: 2000

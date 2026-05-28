@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/customers/:customerId/kyc"
+method: GET
+headers:
+  Authorization: Bearer {{authToken}}
+pathVariables:
+  customerId: ""
+examples: ./.resources/Get KYC.resources/examples
+order: 2000

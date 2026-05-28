@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/customers"
+method: POST
+headers:
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "demo@sourcefuse.example.com",
+      "firstName": "Alex",
+      "lastName": "Diaz"
+    }
+examples: ./.resources/Create customer.resources/examples
+order: 2000

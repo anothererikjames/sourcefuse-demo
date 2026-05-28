@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/audit?correlationId=cor_demo"
+method: GET
+headers:
+  Authorization: Bearer {{authToken}}
+queryParams:
+  correlationId: cor_demo
+examples: ./.resources/List audit events.resources/examples
+order: 1000

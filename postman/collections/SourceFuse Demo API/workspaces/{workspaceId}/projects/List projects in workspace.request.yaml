@@ -1,0 +1,57 @@
+$kind: http-request
+url: "{{baseUrl}}/workspaces/:workspaceId/projects?status=archived&limit=25&cursor=string"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: status
+    value: archived
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "active",
+              "archived"
+            ]
+          }
+        }
+      }
+  - key: limit
+    value: "25"
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "default": 25
+          }
+        }
+      }
+  - key: cursor
+    value: string
+    $type: string
+pathVariables:
+  - key: workspaceId
+    value: b9574e3d-dc9a-14da-6ddc-f5c5cf7d4e24
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: text
+  content: ""
+examples: ./.resources/List projects in workspace.resources/examples
+order: 1000

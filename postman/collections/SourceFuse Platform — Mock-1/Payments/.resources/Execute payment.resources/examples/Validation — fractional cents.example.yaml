@@ -1,0 +1,24 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/payments"
+  method: POST
+response:
+  statusCode: 422
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": {
+          "code": "validation_error",
+          "fields": [
+            {
+              "field": "amount",
+              "rule": "two_decimal_places"
+            }
+          ]
+        }
+      }
+order: 3000

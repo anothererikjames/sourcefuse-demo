@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  title: CI Regression
+  version: 1.0.0
+  description: "# \U0001F501 CI Regression Pipeline\n\nLightweight collection executed on every PR via GitHub Actions\n(`.github/workflows/ci-regression.yml`).\n\n**Purpose:** early API quality visibility inside CI/CD — not a replacement for K6,\nbut a shift-left gate that catches breaking contracts and latency regressions before\nthey reach perf testing.\n\n**Quality gates:**\n- 100% of contract assertions pass\n- p95 response time < `{{p95BudgetMs}}` ms\n- Zero schema drift versus the OpenAPI source of truth"
+servers:
+  - url: '{{baseUrl}}'
+paths:
+  /health:
+    get:
+      summary: Health
+      responses: {}
+      tags:
+        - Critical path
+      description: Liveness gate.
+  /customers:
+    get:
+      summary: List customers (smoke)
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          example: 5
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{authToken}}'
+        - name: X-Tenant-Id
+          in: header
+          schema:
+            type: string
+          example: '{{tenantId}}'
+      responses: {}
+      tags:
+        - Critical path
+  /openapi.json:
+    get:
+      summary: Get OpenAPI spec hash
+      responses: {}
+      tags:
+        - Critical path
+      description: 'Fetches live OpenAPI doc and asserts the schema hash matches the spec in the repo. If they drift, CI fails.'

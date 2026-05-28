@@ -1,0 +1,85 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/workspaces?limit=25&cursor=string"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    limit: "25"
+    cursor: string
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "id": "a89be8d8-ccfc-5e6a-3b71-61bd02e75449",
+            "name": "string",
+            "slug": "string",
+            "description": "string",
+            "createdAt": "1998-02-06T16:41:16.428Z",
+            "updatedAt": "1948-11-20T21:21:56.679Z"
+          },
+          {
+            "id": "fe80de90-f674-81ec-e7b8-d3e9216bee5a",
+            "name": "string",
+            "slug": "string",
+            "description": "string",
+            "createdAt": "2003-01-20T09:01:27.732Z",
+            "updatedAt": "1960-08-24T22:42:03.037Z"
+          }
+        ],
+        "nextCursor": "string"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "slug"
+              ]
+            }
+          },
+          "nextCursor": {
+            "type": "string"
+          }
+        }
+      }
+order: 1000
